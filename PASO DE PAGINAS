@@ -50,6 +50,9 @@ def page_3():
     st.write(" Esto tambien es contenido")
     
     # Botones de navegación
+
+streamlit run app.py
+
     if st.button('Ir a Página 2'):
         st.page_link("/page_2")
 
