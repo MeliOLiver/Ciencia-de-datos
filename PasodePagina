@@ -1,0 +1,57 @@
+import streamlit as st
+
+# Definir las páginas de la app
+PAGES = {
+    "PORTADA": "page_1.py",
+    "INTRODUCCION": "page_1.py",
+    "PAGINA 1": "page_2.py",
+    "PAGINA 2": "page_3.py",
+}
+
+def main():
+    # Navegación de las páginas
+    st.sidebar.title("Navegación")
+    selection = st.sidebar.radio("Selecciona una página", list(PAGES.keys()))
+    page = PAGES[selection]
+    
+    # Ejecutar el archivo de la página seleccionada
+    exec(open(page).read())
+
+if __name__ == "__main__":
+    main()
+
+
+def page_1():
+    st.title("PORTADA")
+    st.write("APLICACIÓN MULTIPAGINA")
+    
+    # Botones de navegación
+    if st.button('Ir a Página 2'):
+        st.page_link("/page_2")
+
+    if not st.session_state.get('first_page', False):
+        st.session_state.first_page = True
+
+
+def page_2():
+    st.title("INTRODUCCION")
+    st.write("Esto es contenido")
+    
+    # Botones de navegación
+    if st.button('Ir a Página 1'):
+        st.page_link("/page_1")
+    
+    if st.button('Ir a Página 3'):
+        st.page_link("/page_3")
+
+
+def page_3():
+    st.title("Página 3")
+    st.write(" Esto tambien es contenido")
+    
+    # Botones de navegación
+    if st.button('Ir a Página 2'):
+        st.page_link("/page_2")
+
+streamlit run appPaginas.py
+
